@@ -1,10 +1,10 @@
 import { Accordion, AccordionItem, Avatar, Button, Spacer } from '@nextui-org/react'
 import { Track } from '../types'
-import {  AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { TrackDeleteButton } from './TrackDeleteButton/index';
 type TrackAccordionProps = {
     tracks: Track[];
-    onDeleteTrack: (trackId : string) => void;
+    onDeleteTrack: (trackId: string) => void;
 }
 
 function TrackAccordion({ tracks, onDeleteTrack }: TrackAccordionProps) {
@@ -24,7 +24,7 @@ function TrackAccordion({ tracks, onDeleteTrack }: TrackAccordionProps) {
                                 <Avatar
                                     color="secondary"
                                     radius="lg"
-                                    src={`${import.meta.env.VITE_API_URL}/${track.cover_url}`}
+                                    src={`http://localhost:8000/${track.cover_url}`}
                                 />
                             </div>
                         }

@@ -3,7 +3,7 @@ import { Album, NewAlbumFormData, NewTrackFormData, RegisterFormData, SignInForm
 import { toast } from 'react-toastify';
 
 const http: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: 'http://localhost:8000',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

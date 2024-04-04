@@ -20,7 +20,7 @@ const AlbumCard = ({ album, onAlbumDelete }: AlbumCardProps) => {
                 <Image
                     alt="Capa do Álbum"
                     className="object-fill  w-80 h-62"
-                    src={`${import.meta.env.VITE_API_URL}/${album.cover_url}`}
+                    src={`http://localhost:8000/${album.cover_url}`}
                 />
             </CardBody>
 

@@ -1,5 +1,4 @@
-// AlbumArea.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Album } from '../types';
 import { getAlbums } from '../lib/axios';
 import AlbumCard from './AlbumCard';
@@ -19,9 +18,9 @@ function AlbumArea() {
         fetchData();
     }, []);
 
-    const filteredAlbums = albums.filter(album =>
+    const filteredAlbums = Array.isArray(albums) ? albums.filter(album =>
         album.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    ) : [];
 
     const handleSearchChange = (term: string) => {
         setSearchTerm(term);
@@ -37,7 +36,7 @@ function AlbumArea() {
 
     return (
         <div>
-            <p className='text-4xl text-center font-bold mt-3'>Albuns</p>
+            <p className='text-4xl text-center font-bold mt-3'>Albums</p>
             <div className="flex flex-col items-center mt-5">
                 <AlbumSearchInput onChange={handleSearchChange} />
                 <Spacer y={5} />

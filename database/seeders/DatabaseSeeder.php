@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
 
         Album::factory()->create([
             'name' => 'Album 0',
-            'cover_url' => 'https://example.com/capa.jpg',
+            'cover_url' => 'storage/default/default.jpg',
+            'description' => '...',
+            'background_url' => 'storage/default/default.jpg'
         ]);
 
         Track::factory(5)->create();
