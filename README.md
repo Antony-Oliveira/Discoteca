@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Discoteca - Tião Carreiro e Pardinho
 
-## About Laravel
+O projeto Discoteca consiste numa apresentação de albuns da banda Tião Carreiro e Pardinho.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instruções de instalação
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Para instalar e rodar corretamente o projeto, deverá executar os seguintes comandos em seu terminal
 
-## Learning Laravel
+1 - clone este repositório
+```bash
+git clone https://github.com/Antony-Oliveira/Discoteca.git
+cd Discoteca
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2 - Instalação de pacotes composer
+```bash
+composer install
+```
+3 - Configurações do .env
+```bash
+cp .env.example .env
+php artisan generate
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4 - Configurar migrations (banco de dados)
+```bash
+php artisan migrate
+```
+observação: o banco de dados será a partir de um arquivo sqlite, portando, quando o comando deste passo pedir, confirme com yes.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+5 - Criação de link simbólico entre public/ e storage/public
+```bash
+php artisan storage:link
+```
 
-## Laravel Sponsors
+6 - Rodar servidor php
+```bash
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Comandos para o front end
 
-### Premium Partners
+Agora, abra uma nova aba de terminal e execute os seguintes comandos:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1 - Entrar na pasta client do projeto
 
-## Contributing
+```bash
+cd client-discoteca
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2 - Instalar pacotes e dependências
+```bash
+npm install
+```
 
-## Code of Conduct
+3 - Rodar servidor do client
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm run dev
+```
+## Conclusão
 
-## Security Vulnerabilities
+Pronto! Agora é só acessar [http://localhost:3000](http://localhost:3000) e testar o projeto :D
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Funcionalidades
 
-## License
+#### Raíz ( / )
+Logo na rota principal do cliente, é possivel visualizar albums em cards, pesquisa-los por nome,criar um novo, excluir, e obter mais informações sobre o album.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Detalhes do album ( /album/{id} )
+Aqui é possível ver informações adicionais que não estão presentes na raíz, como descrição do album, suas músicas.
+Além disso, aqui também é possível excluir e adicionar músicas, como também pesquisar por nome.
+## Recursos
+
+### Stack
+
+O projeto usa a stack Laravel + React, sendo servidor e client respectivamente. Ambos se conectam atráves de rotas API definidas no Laravel, que processam informações enviadas pelo React.
+
+### UI
+
+O projeto usa a biblioteca NextUI, auxiliando com componentes pré estilizados, facilitando o desenvolvimento das páginas.
+
+### Autenticação
+#### CORS
+
+O servidor irá apenas aceitar solicitações de uma fonte definida na váriavel de ambiente FRONTEND_URL, no .env. Assim, apenas requisições vindas da aplicação serão aceitas, independente de middlewares.
+
+#### Rotas livres
+
+As rotas /login, /register, /albums e /album{album}, presentes no arquivo de definições de rotas pra api api.php, são livres, ou seja, sem middlewares.
+
+#### Rotas protegidas
+As rotas /track/add, /track/{track}/delete, /album/{album}/delete, /album/add e /user/{user}/logout são rotas protegidas pelo middleware auth:sanctum, fazendo com que essas rotas apenas são aceitas caso esteja presente no header da requisição um Bearer token, que será fornecido apenas após um login bem sucedido na rota /login.
+
+## Requests
+
+A validação dos dados é feita por meio dos Requests do Laravel, ou seja, caso tenha algum erro com os dados fornecidos pelo cliente, no próprio Request isso será tratado, dessa forma, o Controller apenas se encarrega de executar sua função, sem se preocupar com os erros de validação.
+
