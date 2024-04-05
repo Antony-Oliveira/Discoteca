@@ -77,7 +77,7 @@ const NewTrackFormModal = ({ isOpen, onOpenChange, onClose, albumId, onTrackAdde
                                     type="text"
                                     variant="bordered"
                                     maxLength={5}
-                                    {...register('duration', { required: "Informe a duração da música", pattern: { value: /([0-9]{1,2}):([0-5][0-9])/, message: 'Formato inválido' }, })}
+                                    {...register('duration', { required: "Informe a duração da música", pattern: { value: /([0-9]{1,2}):([0-5][0-9])/, message: 'Digite no formato 00:00 !!' }, })}
                                     errorMessage={errors.duration && errors.duration.message}
                                     isInvalid={errors.duration ? true : false}
                                 />

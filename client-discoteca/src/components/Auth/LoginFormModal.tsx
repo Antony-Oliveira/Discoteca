@@ -48,7 +48,15 @@ const LoginFormModal = () => {
                                         label="Email"
                                         placeholder="Digite seu email"
                                         variant="bordered"
-                                        {...register('email', { required: 'Email obrigatório' })}
+                                        {...register('email',
+                                            {
+                                                required: "O email é obrigatório",
+                                                pattern: {
+                                                    value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
+                                                    message: "Digite o email corretamente"
+                                                }
+                                            }
+                                        )}
                                     />
                                     <Spacer y={3} />
                                     <Input
