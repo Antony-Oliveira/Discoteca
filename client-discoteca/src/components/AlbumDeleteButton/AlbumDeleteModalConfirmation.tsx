@@ -2,6 +2,7 @@ import { ModalContent, ModalFooter, ModalHeader, Button, ModalBody, Modal } from
 import React, { useState } from 'react'
 import { albumDelete } from '../../lib/axios';
 import { useAuth } from '../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 interface ModalProps {
     isOpen: boolean;
@@ -20,6 +21,7 @@ const AlbumDeleteModalConfirmation = ({ isOpen, onOpenChange, albumName, albumId
         setIsLoading(true);
         await albumDelete(albumId, token);
         setIsLoading(false);
+        toast.success("Album deletado com sucesso.");
         onClose();
         setTimeout(() => {
             onDeleteAlbum(albumId)

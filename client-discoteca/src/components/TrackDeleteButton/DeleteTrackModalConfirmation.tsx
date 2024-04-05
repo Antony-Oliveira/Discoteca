@@ -2,6 +2,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from
 import React, { useState } from 'react'
 import { trackDelete } from '../../lib/axios';
 import { useAuth } from '../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 interface ModalConfirmationProps {
     isOpen: boolean;
@@ -19,6 +20,7 @@ const DeleteTrackModalConfirmation = ({isOpen, onOpenChange, trackName, trackId,
         setIsLoading(true);
         await trackDelete(trackId, token);
         setIsLoading(false);
+        toast.success("Música deletada com sucesso.")
         onClose();
         setTimeout(() => {
             onDeleteTrack(trackId)

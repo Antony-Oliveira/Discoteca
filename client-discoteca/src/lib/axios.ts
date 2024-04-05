@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { Album, NewAlbumFormData, NewTrackFormData, RegisterFormData, SignInFormData, User } from '../types';
 import { toast } from 'react-toastify';
+import { redirect } from 'react-router-dom';
 
 const http: AxiosInstance = axios.create({
     baseURL: 'http://localhost:8000',
@@ -32,12 +33,11 @@ export const getAlbums = async (): Promise<Album[]> => {
 
 export const getAlbumInfo = async (id: string): Promise<Album | undefined> => {
     try {
-        console.log(id);
 
         const res = await http.get(`/api/album/${id}`);
         return res.data;
     } catch (error) {
-        return undefined;
+        redirect('/');
     }
 }
 
@@ -45,7 +45,6 @@ export const trackDelete = async (trackId: string, token: string) => {
     try {
 
         const res = await http.delete(`/api/track/${trackId}/delete`, {headers: {Authorization: `Bearer ${token}`}});
-
     } catch (error) {
         return;
     }
