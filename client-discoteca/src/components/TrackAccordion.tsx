@@ -32,9 +32,6 @@ function TrackAccordion({ tracks, onDeleteTrack }: TrackAccordionProps) {
                         title={track.name}
                     >
                         <div className="ml-3 flex gap-4 items-center">
-                            <Button className='text-white' size='md' color="success" startContent={<AiOutlineEdit />}>
-                                Editar música
-                            </Button>
                             <TrackDeleteButton trackId={track.id} trackName={track.name} onDeleteTrack={onDeleteTrack} />
                         </div>
                     </AccordionItem>
