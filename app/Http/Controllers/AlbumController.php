@@ -17,17 +17,6 @@ class AlbumController extends Controller
         return response()->json($albums);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreAlbumRequest $request)
     {
         $albumNameSlug = \Str::slug($request->input('name'));
@@ -36,23 +25,19 @@ class AlbumController extends Controller
         $coverFileName = null;
         $backgroundFileName = null;
 
-        // Verifica se o arquivo da capa foi enviado
         if ($request->hasFile('albumCover')) {
             $coverFileName = $albumNameSlug . '_' . time() . '.' . $request->file('albumCover')->getClientOriginalExtension();
             $request->file('albumCover')->storeAs('public/' . $albumPath, $coverFileName);
         }
 
-        // Verifica se o arquivo do fundo foi enviado
         if ($request->hasFile('albumBackground')) {
             $backgroundFileName = $albumNameSlug . '_' . time() . '.' . $request->file('albumBackground')->getClientOriginalExtension();
             $request->file('albumBackground')->storeAs('public/' . $albumPath, $backgroundFileName);
         }
 
-        // Define os URLs de capa e fundo do álbum
-        $coverUrl = $coverFileName ? 'storage/' . $albumPath . $coverFileName : $this->defaultImage; // Se não houver capa, use a imagem padrão
-        $backgroundUrl = $backgroundFileName ? 'storage/' . $albumPath . $backgroundFileName : $this->defaultImage; // Se não houver fundo, use a imagem padrão
+        $coverUrl = $coverFileName ? 'storage/' . $albumPath . $coverFileName : $this->defaultImage;
+        $backgroundUrl = $backgroundFileName ? 'storage/' . $albumPath . $backgroundFileName : $this->defaultImage;
 
-        // Cria o álbum no banco de dados
         $album = Album::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -64,27 +49,13 @@ class AlbumController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Album $album)
     {
         $album = $album->load("tracks");
         return response()->json($album);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Album $album)
-    {
-        //
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Album $album)
     {
         $album->delete();
